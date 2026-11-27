@@ -6,11 +6,13 @@ volumes:
 services:
   db:
     image: postgres:13
+    restart: always
     env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
   backend:
     image: dmdyakov/kittygram_backend
+    restart: always
     env_file: .env
     depends_on:
       - db
@@ -25,6 +27,7 @@ services:
       - static:/static
   gateway:
     image: dmdyakov/kittygram_gateway
+    restart: always
     env_file: .env
     depends_on:
       - backend
